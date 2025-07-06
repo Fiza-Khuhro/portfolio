@@ -108,6 +108,7 @@
       position: relative;
       z-index: 1;
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      margin: 5px;
     }
 
     .btn:hover {
@@ -115,6 +116,29 @@
       color: #fff;
       transform: translateY(-2px);
       box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    /* Resume Button Styles */
+    .resume-btn {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+      margin-left: 10px;
+    }
+
+    .resume-btn:hover {
+      background: white;
+      color: var(--primary-color);
+    }
+
+    [data-theme="dark"] .resume-btn {
+      border-color: var(--text-color);
+      color: var(--text-color);
+    }
+
+    [data-theme="dark"] .resume-btn:hover {
+      background: var(--text-color);
+      color: var(--bg-color);
     }
 
     section {
@@ -668,6 +692,9 @@
     <div>
       <a href="mailto:fkhuhro3@icloud.com" class="btn">Contact Me</a>
       <a href="https://www.linkedin.com/in/fizakhuhro" target="_blank" class="btn">LinkedIn</a>
+      <a href="resume.pdf" download="Fiza_Khuhro_Resume.pdf" class="btn resume-btn">
+        <i class="fas fa-download"></i> Download Resume
+      </a>
     </div>
   </header>
 
