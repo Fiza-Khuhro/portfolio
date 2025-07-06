@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fiza Khuhro | CS Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      transition: background-color 0.3s, color 0.1s;
+    }
+
+    :root {
+      --primary-color: #2575fc;
+      --secondary-color: #6a11cb;
+      --text-color: #333;
+      --bg-color: #f8f9fa;
+      --section-bg: rgba(255,255,255,0.9);
+      --card-bg: #fff;
+      --border-color: rgba(0,0,0,0.05);
+      --shadow-color: rgba(0,0,0,0.1);
+      --text-light: #718096;
+      --timeline-bg: linear-gradient(to bottom, #6a11cb, #2575fc);
+      --particle-color: rgba(106, 17, 203, 0.2);
+    }
+
+    [data-theme="dark"] {
+      --primary-color: #4a8cff;
+      --secondary-color: #8a2be2;
+      --text-color: #f0f0f0;
+      --bg-color: #121212;
+      --section-bg: rgba(30, 30, 30, 0.9);
+      --card-bg: #1e1e1e;
+      --border-color: rgba(255,255,255,0.05);
+      --shadow-color: rgba(0,0,0,0.3);
+      --text-light: #a0a0a0;
+      --timeline-bg: linear-gradient(to bottom, #8a2be2, #4a8cff);
+      --particle-color: rgba(138, 43, 226, 0.2);
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(var(--secondary-color-rgb), 0.08) 0%, transparent 30%),
+        radial-gradient(circle at 80% 70%, rgba(var(--primary-color-rgb), 0.08) 0%, transparent 30%),
+        linear-gradient(135deg, var(--bg-color) 0%, var(--bg-color) 100%);
+      z-index: -1;
+    }
+
+    header {
+      text-align: center;
+      padding: 100px 20px;
+      background: linear-gradient(to right, var(--secondary-color), var(--primary-color));
+      color: white;
+      animation: fadeDown 2s ease-out;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      background: linear-gradient(to bottom right, transparent 49.5%, var(--bg-color) 50%);
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn {
+      background: #fff;
+      color: var(--primary-color);
+      padding: 12px 24px;
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .btn:hover {
+      background: var(--primary-color);
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    section {
+      padding: 80px 20px;
+      max-width: 1000px;
+      margin: auto;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 1s ease;
+      position: relative;
+      background-color: var(--section-bg);
+      border-radius: 15px;
+      box-shadow: 0 10px 30px var(--shadow-color);
+      margin-top: 30px;
+      margin-bottom: 30px;
+      backdrop-filter: blur(5px);
+    }
+
+    section::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+      z-index: -1;
+      border-radius: 16px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    section:hover::before {
+      opacity: 0.3;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      color: var(--primary-color);
+      margin-bottom: 30px;
+      text-align: center;
+      position: relative;
+    }
+
+    h2::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(to right, var(--secondary-color), var(--primary-color));
+      margin: 10px auto;
+      border-radius: 2px;
+    }
+
+    .project, .education-block {
+      background: var(--card-bg);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 8px 30px var(--shadow-color);
+      margin-bottom: 30px;
+      transition: transform 0.3s;
+      border: 1px solid var(--border-color);
+    }
+
+    .project:hover, .education-block:hover {
+      transform: scale(1.03);
+      box-shadow: 0 12px 35px var(--shadow-color);
+    }
+
+    a {
+      color: var(--primary-color);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    a:hover {
+      color: var(--secondary-color);
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 20px;
+    }
+
+    ul li::before {
+      content: "✔";
+      color: var(--primary-color);
+      margin-right: 10px;
+    }
+
+    /* Dark Mode Toggle */
+    .theme-switch-wrapper {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      align-items: center;
+      z-index: 100;
+    }
+
+    .theme-switch {
+      display: inline-block;
+      height: 34px;
+      position: relative;
+      width: 60px;
+    }
+
+    .theme-switch input {
+      display: none;
+    }
+
+    .slider {
+      background-color: #ccc;
+      bottom: 0;
+      cursor: pointer;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      transition: .4s;
+      border-radius: 34px;
+    }
+
+    .slider:before {
+      background-color: #fff;
+      bottom: 4px;
+      content: "";
+      height: 26px;
+      left: 4px;
+      position: absolute;
+      transition: .4s;
+      width: 26px;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background: linear-gradient(to right, var(--secondary-color), var(--primary-color));
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+
+    .slider i {
+      position: absolute;
+      color: white;
+      font-size: 12px;
+    }
+
+    .fa-sun {
+      right: 8px;
+      top: 8px;
+    }
+
+    .fa-moon {
+      left: 8px;
+      top: 8px;
+    }
+
+    /* Enhanced Skills Section Styles */
+    .skills-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-top: 1rem;
+      justify-content: center;
+    }
+
+    .skill-category {
+      flex: 1;
+      min-width: 250px;
+      background: var(--card-bg);
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px var(--shadow-color);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border-top: 5px solid;
+      border: 1px solid var(--border-color);
+    }
+
+    .skill-category:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 15px 40px var(--shadow-color);
+    }
+
+    .skill-category h3 {
+      font-size: 1.4rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.8rem;
+      position: relative;
+      text-align: center;
+    }
+
+    .skill-category h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 3px;
+      background: currentColor;
+      border-radius: 3px;
+    }
+
+    .skill-category:nth-child(1) {
+      border-color: var(--secondary-color);
+    }
+
+    .skill-category:nth-child(1) h3 {
+      color: var(--secondary-color);
+    }
+
+    .skill-category:nth-child(2) {
+      border-color: var(--primary-color);
+    }
+
+    .skill-category:nth-child(2) h3 {
+      color: var(--primary-color);
+    }
+
+    .skill-category:nth-child(3) {
+      border-color: #2ca58d;
+    }
+
+    .skill-category:nth-child(3) h3 {
+      color: #2ca58d;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      justify-content: center;
+    }
+
+    .skill-tag {
+      padding: 0.6rem 1.2rem;
+      font-size: 0.9rem;
+      border-radius: 30px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Technical skills tags */
+    .skill-category:nth-child(1) .skill-tag {
+      background: rgba(106, 17, 203, 0.1);
+      color: var(--secondary-color);
+      border: 1px solid rgba(106, 17, 203, 0.3);
+    }
+
+    .skill-category:nth-child(1) .skill-tag:hover {
+      background: var(--secondary-color);
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(106, 17, 203, 0.2);
+    }
+
+    /* Tools & Libraries tags */
+    .skill-category:nth-child(2) .skill-tag {
+      background: rgba(37, 117, 252, 0.1);
+      color: var(--primary-color);
+      border: 1px solid rgba(37, 117, 252, 0.3);
+    }
+
+    .skill-category:nth-child(2) .skill-tag:hover {
+      background: var(--primary-color);
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(37, 117, 252, 0.2);
+    }
+
+    /* Professional skills tags */
+    .skill-category:nth-child(3) .skill-tag {
+      background: rgba(44, 165, 141, 0.1);
+      color: #2ca58d;
+      border: 1px solid rgba(44, 165, 141, 0.3);
+    }
+
+    .skill-category:nth-child(3) .skill-tag:hover {
+      background: #2ca58d;
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(44, 165, 141, 0.2);
+    }
+
+    /* Modern Experience Section */
+    .experience-container {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      position: relative;
+    }
+
+    .experience-container::before {
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: var(--timeline-bg);
+      border-radius: 2px;
+      z-index: 1;
+    }
+
+    .experience-block {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 10px 30px var(--shadow-color);
+      position: relative;
+      margin-left: 50px;
+      transition: all 0.4s ease;
+      border-left: 4px solid var(--primary-color);
+      border: 1px solid var(--border-color);
+    }
+
+    .experience-block:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px var(--shadow-color);
+      border-left: 4px solid var(--secondary-color);
+    }
+
+    .experience-block::before {
+      content: '';
+      position: absolute;
+      left: -40px;
+      top: 40px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--primary-color);
+      z-index: 2;
+      border: 4px solid var(--card-bg);
+    }
+
+    .experience-header {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-bottom: 15px;
+    }
+
+    .experience-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text-color);
+      margin-bottom: 5px;
+    }
+
+    .experience-company {
+      color: var(--secondary-color);
+      font-weight: 600;
+    }
+
+    .experience-date {
+      color: var(--text-light);
+      font-size: 0.9rem;
+      background: rgba(113, 128, 150, 0.1);
+      padding: 5px 10px;
+      border-radius: 20px;
+      align-self: center;
+    }
+
+    .experience-details ul {
+      margin-top: 15px;
+    }
+
+    .experience-details li {
+      margin-bottom: 10px;
+      position: relative;
+      padding-left: 25px;
+      line-height: 1.5;
+    }
+
+    .experience-details li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--primary-color);
+    }
+
+    /* Modern Certifications Section */
+    .certifications-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .certificate-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px var(--shadow-color);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      border-top: 5px solid var(--secondary-color);
+      border: 1px solid var(--border-color);
+    }
+
+    .certificate-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 15px 40px var(--shadow-color);
+    }
+
+    .certificate-header {
+      padding: 25px 25px 15px;
+      position: relative;
+    }
+
+    .certificate-icon {
+      position: absolute;
+      right: 25px;
+      top: -25px;
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.5rem;
+      box-shadow: 0 5px 15px rgba(106, 17, 203, 0.3);
+    }
+
+    .certificate-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text-color);
+      margin-bottom: 5px;
+      padding-right: 40px;
+    }
+
+    .certificate-issuer {
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    .certificate-date {
+      display: inline-block;
+      background: rgba(37, 117, 252, 0.1);
+      color: var(--primary-color);
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      margin-top: 10px;
+      font-weight: 600;
+    }
+
+    .certificate-footer {
+      padding: 15px 25px 25px;
+      background: var(--section-bg);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .certificate-btn {
+      background: linear-gradient(to right, var(--secondary-color), var(--primary-color));
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .certificate-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(37, 117, 252, 0.3);
+    }
+
+    .certificate-id {
+      color: var(--text-light);
+      font-size: 0.8rem;
+      font-style: italic;
+    }
+
+    /* Floating particles background */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      background: var(--particle-color);
+      border-radius: 50%;
+      animation: float linear infinite;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(0deg);
+      }
+      100% {
+        transform: translateY(-100vh) rotate(360deg);
+      }
+    }
+
+    @keyframes fadeDown {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+  <!-- Dark Mode Toggle -->
+  <div class="theme-switch-wrapper">
+    <label class="theme-switch" for="checkbox">
+      <input type="checkbox" id="checkbox">
+      <div class="slider round">
+        <i class="fas fa-sun"></i>
+        <i class="fas fa-moon"></i>
+      </div>
+    </label>
+  </div>
+
+  <!-- Floating particles background -->
+  <div class="particles" id="particles"></div>
+
+  <header>
+    <h1>Fiza Khuhro</h1>
+    <p>Computer Science Student | Data Science & ML Enthusiast | Python Developer</p>
+    <div>
+      <a href="mailto:fkhuhro3@icloud.com" class="btn">Contact Me</a>
+      <a href="https://www.linkedin.com/in/fizakhuhro" target="_blank" class="btn">LinkedIn</a>
+    </div>
+  </header>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>
+      I am a dedicated Computer Science undergraduate at SZABIST, specializing in Data Science and Artificial Intelligence. With a deep passion for machine learning, predictive analytics, and AI-driven solutions, I constantly seek opportunities to apply my technical skills to real-world challenges. My academic journey has equipped me with a strong foundation in programming, algorithms, and data structures, while my hands-on experience in software development and data analysis has sharpened my ability to build scalable, intelligent systems.
+    </p>
+    <br>
+    <p>
+      Beyond coursework, I actively work on personal and collaborative projects—from developing machine learning models to creating data visualizations—that reinforce my problem-solving abilities and technical creativity. I thrive in environments where innovation meets execution, whether it's optimizing data pipelines, designing AI applications, or contributing to open-source initiatives. My goal is to leverage technology to derive meaningful insights, automate solutions, and drive impactful change in the evolving landscape of tech.
+    </p>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skills-container">
+      <!-- Technical Skills -->
+      <div class="skill-category">
+        <h3>Technical</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Python Development</span>
+          <span class="skill-tag">Data Science</span>
+          <span class="skill-tag">Machine Learning</span>
+          <span class="skill-tag">HTML/CSS/JS</span>
+          <span class="skill-tag">Analytical Problem Solving</span>
+        </div>
+      </div>
+
+      <!-- Tools & Libraries -->
+      <div class="skill-category">
+        <h3>Tools & Libraries</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Pandas</span>
+          <span class="skill-tag">scikit-learn</span>
+          <span class="skill-tag">Matplotlib</span>
+          <span class="skill-tag">TensorFlow</span>
+          <span class="skill-tag">NumPy</span>
+        </div>
+      </div>
+
+      <!-- Professional Skills -->
+      <div class="skill-category">
+        <h3>Professional</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Communication</span>
+          <span class="skill-tag">Team Collaboration</span>
+          <span class="skill-tag">Project Management</span>
+          <span class="skill-tag">Problem Solving</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <h2>Experience</h2>
+    <div class="experience-container">
+      <div class="experience-block">
+        <div class="experience-header">
+          <div>
+            <h3 class="experience-title">Developer</h3>
+            <p class="experience-company">@ NASTP</p>
+          </div>
+          <span class="experience-date">July 2025 – Present</span>
+        </div>
+        <div class="experience-details">
+          <ul>
+            <li>Contributing to software modules for aerospace data analysis.</li>
+            <li>Assisting in building dashboards and machine learning models.</li>
+            <li>Working collaboratively on data pipelines and visualizations.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="experience-block">
+        <div class="experience-header">
+          <div>
+            <h3 class="experience-title">Founder</h3>
+            <p class="experience-company">@ Noon Attire (Clothing Brand)</p>
+          </div>
+          <span class="experience-date">[Start Date] – [End Date or Present]</span>
+        </div>
+        <div class="experience-details">
+          <ul>
+            <li>Founded and managed all aspects of the clothing brand including design, production, and marketing.</li>
+            <li>Developed brand identity and established online presence through e-commerce platforms.</li>
+            <li>Managed inventory, customer relations, and sales strategies.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="project">
+      <strong>Student Performance Prediction System</strong>
+      <p>Used machine learning to predict student outcomes based on academic and social factors. Accuracy ~85%.</p>
+    </div>
+    <div class="project">
+      <strong>Flight Delay Analysis Dashboard</strong>
+      <p>Interactive dashboard using Dash and Plotly to visualize flight delays across US airports.</p>
+    </div>
+    <div class="project">
+      <strong>Fake News Detection System</strong>
+      <p>Built a Logistic Regression model using NLP techniques to detect fake news. Precision: 92%.</p>
+    </div>
+    <div class="project">
+      <strong>Diabetes Prediction App</strong>
+      <p>Created a Flask web app to predict diabetes from medical data using ML models.</p>
+    </div>
+  </section>
+
+  <section id="education">
+    <h2>Education</h2>
+    <div class="education-block">
+      <p><strong>SZABIST University</strong> – Bachelor's in Computer Science (2023–2027)</p>
+      <ul>
+        <li>Completed 5th semester </li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="certifications">
+    <h2>Certifications</h2>
+    <div class="certifications-container">
+      <div class="certificate-card">
+        <div class="certificate-header">
+          <div class="certificate-icon">📊</div>
+          <h3 class="certificate-title">Exploratory Data Analysis (EDA)</h3>
+          <p class="certificate-issuer">Data Science Institute</p>
+          <span class="certificate-date">Completed: June 2024</span>
+        </div>
+        <div class="certificate-footer">
+          <span class="certificate-id">Cert ID: DS-EDA-2024</span>
+          <a href="#" class="certificate-btn">View Credential</a>
+        </div>
+      </div>
+
+      <div class="certificate-card">
+        <div class="certificate-header">
+          <div class="certificate-icon">🔢</div>
+          <h3 class="certificate-title">Numpy for Data Science</h3>
+          <p class="certificate-issuer">Python Academy</p>
+          <span class="certificate-date">Completed: May 2024</span>
+        </div>
+        <div class="certificate-footer">
+          <span class="certificate-id">Cert ID: PY-NP-2024</span>
+          <a href="#" class="certificate-btn">View Credential</a>
+        </div>
+      </div>
+
+      <div class="certificate-card">
+        <div class="certificate-header">
+          <div class="certificate-icon">🐍</div>
+          <h3 class="certificate-title">Python Development & Data Science</h3>
+          <p class="certificate-issuer">Tech Certification Board</p>
+          <span class="certificate-date">Completed: April 2024</span>
+        </div>
+        <div class="certificate-footer">
+          <span class="certificate-id">Cert ID: TC-PYDS-2024</span>
+          <a href="#" class="certificate-btn">View Credential</a>
+        </div>
+      </div>
+
+      <div class="certificate-card">
+        <div class="certificate-header">
+          <div class="certificate-icon">📈</div>
+          <h3 class="certificate-title">Python for Data Analysis</h3>
+          <p class="certificate-issuer">Data Analytics Council</p>
+          <span class="certificate-date">Completed: March 2024</span>
+        </div>
+        <div class="certificate-footer">
+          <span class="certificate-id">Cert ID: DA-PY-2024</span>
+          <a href="#" class="certificate-btn">View Credential</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:fkhuhro3@icloud.com">fkhuhro3@icloud.com</a></p>
+    <p>LinkedIn: <a href="https://www.linkedin.com/in/fizakhuhro" target="_blank">linkedin.com/in/fizakhuhro</a></p>
+  </section>
+
+  <script>
+    // Dark Mode Toggle
+    const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+    const currentTheme = localStorage.getItem('theme');
+
+    if (currentTheme) {
+      document.documentElement.setAttribute('data-theme', currentTheme);
+
+      if (currentTheme === 'dark') {
+        toggleSwitch.checked = true;
+      }
+    }
+
+    function switchTheme(e) {
+      if (e.target.checked) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+      }
+    }
+
+    toggleSwitch.addEventListener('change', switchTheme, false);
+
+    // Floating particles animation
+    const particlesContainer = document.getElementById('particles');
+    const particleCount = 30;
+
+    for (let i = 0; i < particleCount; i++) {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+
+      // Random size between 5px and 15px
+      const size = Math.random() * 10 + 5;
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+
+      // Random position
+      particle.style.left = `${Math.random() * 100}%`;
+      particle.style.top = `${Math.random() * 100}%`;
+
+      // Random animation duration between 20s and 40s
+      const duration = Math.random() * 20 + 20;
+      particle.style.animationDuration = `${duration}s`;
+
+      // Random delay
+      particle.style.animationDelay = `${Math.random() * 20}s`;
+
+      particlesContainer.appendChild(particle);
+    }
+
+    // Scroll animation for sections
+    const sections = document.querySelectorAll('section');
+    window.addEventListener('scroll', () => {
+      sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if(rect.top < window.innerHeight - 100) {
+          section.classList.add('visible');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
